@@ -1,0 +1,119 @@
+<html>
+<head></head>
+    <script src="vue.js"></script>
+  <!--  计算缓存 vs Methods
+    如果你不希望有缓存，请用 method 替代。
+    v-show 的元素始终会被渲染并保留在 DOM 中
+    v-show 是简单地切换元素的 CSS 属性 display
+     v-if 与 v-for 一起使用时，v-for 具有比 v-if 更高的优先级。
+     每个组件实例都有相应的 watcher 实例对象，它会在组件渲染的过程中把属性记录为依赖，之后当依赖项的 setter 被调用时，会通知 watcher 重新计算，从而致使它关联的组件得以更新。
+     属性必须在 data 对象上存在才能让 Vue 转换它，这样才能让它是响应的。
+   -->
+<body>
+  <div id="watch-example">
+     <input v-model="msg">
+     {{msg | caps}}
+  </div>
+
+<script type="text/javascript">
+    var app = new Vue({
+      el: '#watch-example',
+      data: {
+        ok:true,
+        msg:'hello'
+        },
+       filters:{
+            caps:function(value){
+                if (!value) return 'nothing'
+                 //  value = value.toString()
+                return value.toUpperCase();
+            }
+        }
+  })
+
+
+
+
+
+
+/*var a = ['A','B','C'];
+//array   in 下标     of 就是key
+a.forEach(function(element, index, array){
+	//元素值   元素下标   对象本身
+	console.log(array);
+})*/
+
+/*var s = new Set(['a','b','c']);
+//set 没有索引    回调函数前两个值都是元素本身
+s.forEach(function(element,index,array){
+	console.log(array);
+});*/
+
+//map 回调函数依次是 value key array
+/*var m = new Map([[1,'x'],[2,'y'],[3,'z']]);
+m.forEach(function(element,index,array){
+	console.log(array);
+});*/
+
+//argumnet 永远指向当前函数的调用者所传入的所有参数
+/*function abs() {
+    if (arguments.length === 0) {
+        return 0;
+    }
+    var x = arguments[0];
+    return x >= 0 ? '当前参数大于0' :  '当前传入的参数为负数';
+}
+console.log(abs(-9));
+JavaScript允许接受任意个参数
+*/
+/*function foo(a,b){
+	var i,rest = [];
+	if(arguments.length > 2){
+		for(i = 2;i<arguments.length;i++){
+			rest.push(arguments[i]);
+		}
+	}
+	console.log('a=' +a);
+	console.log('b='+b);
+	console.log(rest);
+}
+foo(1,2,3,4,5);*/
+//顶层函数的定义也被视为一个全局变量，并绑定到window对象
+//减少冲突的一个方法是把 所有变量和函数全部绑定到一个全局变量中
+/*var myapp = {};
+myapp['name'] = 'myapp';
+myapp.foo = function(){
+	return 'foo';
+}
+var xiaoming = {
+    name: '小明',
+    birth: 1991,
+    age: function () {
+        var y = new Date().getFullYear();
+        return y - this.birth;
+    }
+};
+xiaoming.age;
+console.log(xiaoming.age;*/
+
+
+/*'use strict';
+
+var xiaoming = {
+    name: '小明',
+    birth: 1990,
+    age: function () {
+    	var that = this;
+        function getAgeFromBirth() {
+            var y = new Date().getFullYear();
+            return y - that.birth;
+        }
+        return getAgeFromBirth();
+    }
+};
+
+console.log(xiaoming.age())
+原因是this指针只在age方法的函数内指向xiaoming，在函数内部定义的函数，this又指向undefined了！（在非strict模式下，它重新指向全局对象window！）*/
+</script>
+</body>
+</html>

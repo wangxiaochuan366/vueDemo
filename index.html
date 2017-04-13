@@ -4,6 +4,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vue</title>
     <script src="vue.js"></script>
+    <script src="vue-router.js"></script>
+    <script src="app.js"></script>
   <!--  计算缓存 vs Methods
     如果你不希望有缓存，请用 method 替代。
     v-show 的元素始终会被渲染并保留在 DOM 中
@@ -13,14 +15,20 @@
      属性必须在 data 对象上存在才能让 Vue 转换它，这样才能让它是响应的。
    -->
 <body>
-  <div id="watch-example">
-     <input v-model="msg">
-     {{msg | caps}}
-  </div>
+     <div id="app">
+        <div>
+            <!-- 4、<router-link>默认会被渲染成一个 `<a>` 标签 ,to指令跳转到指定路径 -->
+            <router-link to="/home">Go to Home</router-link>
+            <router-link to="/about/6/3">Go to About</router-link>
+        </div>
+
+        <!-- 5、在页面上使用<router-view></router-view>标签，用于渲染匹配的组件 -->
+        <router-view></router-view>            
+    </div>
 
 <script type="text/javascript">
-    var app = new Vue({
-      el: '#watch-example',
+/*    var app = new Vue({
+      el: '#app',
       data: {
         ok:true,
         msg:'hello'
@@ -33,12 +41,12 @@
             }
         }
   })
-
-
-
-
-
-
+*/
+   // 3. 创建和挂载根实例。记得要通过 router 配置参数注入路由，从而让整个应用都有路由功能
+   // 现在，应用已经启动了！
+        const vm = new Vue({
+              router: router 
+        }).$mount('#app');
 /*var a = ['A','B','C'];
 //array   in 下标     of 就是key
 a.forEach(function(element, index, array){
@@ -84,39 +92,10 @@ foo(1,2,3,4,5);*/
 //顶层函数的定义也被视为一个全局变量，并绑定到window对象
 //减少冲突的一个方法是把 所有变量和函数全部绑定到一个全局变量中
 /*var myapp = {};
-myapp['name'] = 'myapp';
-myapp.foo = function(){
-	return 'foo';
-}
-var xiaoming = {
-    name: '小明',
-    birth: 1991,
-    age: function () {
-        var y = new Date().getFullYear();
-        return y - this.birth;
-    }
-};
-xiaoming.age;
-console.log(xiaoming.age;*/
+myapp['name'] = 'myapp';*/
 
 
-/*'use strict';
 
-var xiaoming = {
-    name: '小明',
-    birth: 1990,
-    age: function () {
-    	var that = this;
-        function getAgeFromBirth() {
-            var y = new Date().getFullYear();
-            return y - that.birth;
-        }
-        return getAgeFromBirth();
-    }
-};
-
-console.log(xiaoming.age())
-原因是this指针只在age方法的函数内指向xiaoming，在函数内部定义的函数，this又指向undefined了！（在非strict模式下，它重新指向全局对象window！）*/
 </script>
 </body>
 </html>
